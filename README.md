@@ -9,7 +9,7 @@ The list of all available symbols is in file
 
 <h3>v0.1</h3>
 Currently, the compilation of assignment, addition and subtraction expressions is working.
-![interpreter operation](interpreter_example.png)
+<img src="https://github.com/cMeWHou/MiniCompiler/blob/master/interpreter_example.png?raw=true">
 
 <h3>How to build</h3>
 Prerequirements:
