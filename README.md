@@ -23,4 +23,6 @@ Build:
     <li><code>git clone https://github.com/cMeWHou/MiniCompiler.git </code></li>
     <li><code>cd MiniCompiler </code></li>
     <li><code>cmake </code></li>
+    <li><code>cd cmake-build-debug </code></li>
+    <li><code>MiniCompiler.exe <i>source_file</i> </code></li>
 </ol>
