@@ -5,16 +5,20 @@
 
 #include <Lexer\Lexeme.h>
 
+#include <General\Common.h>
+
 typedef struct SDictionary {
-    char*       Key;
+    string      Key;
     TLexeme*    Value;
     int         Size;
 
-    void        (*Append)   (struct SDictionary *, char, TLexeme);
-    void        (*Remove)   (struct SDictionary *, char);
-    int         (*Contains) (struct SDictionary *, char);
-    int         (*GetValue) (struct SDictionary *, char);
+    void        (*Append)       (struct SDictionary *, char, TLexeme);
+    void        (*Remove)       (struct SDictionary *, char);
+    int         (*Contains)     (struct SDictionary *, char);
+    int         (*GetValue)     (struct SDictionary *, char);
+
+    void        (*MemoryRelease)(struct SDictionary *);
 } TDictionary;
-TDictionary*    Dictionary  (int);
+TDictionary*    Dictionary      (int);
 
 #endif

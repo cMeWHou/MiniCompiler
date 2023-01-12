@@ -3,12 +3,14 @@
 
 #include <stdlib.h>
 
-#include <General/Common.h>
+#include <General\Common.h>
 
 static void Append(TDictionary *, char, TLexeme);
 static void Remove(TDictionary *, char);
 static int Contains(TDictionary *, char);
 static int GetValue(TDictionary *, char);
+
+static void MemoryRelease(TDictionary *);
 
 TDictionary *Dictionary(int maxSize) {
     TDictionary *this = malloc(sizeof(TDictionary));
@@ -17,6 +19,7 @@ TDictionary *Dictionary(int maxSize) {
     this->Remove = Remove;
     this->Contains = Contains;
     this->GetValue = GetValue;
+    this->MemoryRelease = MemoryRelease;
 
     // CTR
     this->Key = malloc(sizeof(char) * maxSize);
@@ -66,4 +69,12 @@ static int GetValue(TDictionary *this, char key) {
     }
 
     return __BAD_VAL__;
+}
+
+static void MemoryRelease(TDictionary *this) {
+    free(this->Key);
+    free(this->Value);
+    free(this);
+
+    this = __ZERO_PTR__;
 }

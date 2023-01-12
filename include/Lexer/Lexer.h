@@ -8,6 +8,8 @@
 
 #include <stdio.h>
 
+#include <General\Common.h>
+
 typedef struct SLexer {
     FILE*           sourceCode;
 
@@ -19,9 +21,11 @@ typedef struct SLexer {
     TDictionary*    Symbols;
     TDictionary*    Words;
 
-    char            (*NextChar) (struct SLexer *);
-    void            (*NextToken)(struct SLexer *);
+    char            (*NextChar)     (struct SLexer *);
+    void            (*NextToken)    (struct SLexer *);
+
+    void            (*MemoryRelease)(struct SLexer *);
 } TLexer;
-TLexer*             Lexer       (char *);
+TLexer*             Lexer       (string);
 
 #endif

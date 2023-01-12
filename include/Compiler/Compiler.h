@@ -4,7 +4,6 @@
 #define COMPILER
 
 #include <Parser\Node.h>
-
 #include <VM\Stack.h>
 #include <VM\Instruction.h>
 
@@ -12,9 +11,11 @@ typedef struct SCompiler {
     TStack* Program;
     int     Pcounter;
 
-    void    (*Gen)      (struct SCompiler *, TInstruction);
-    TStack* (*Compile)  (struct SCompiler *, TNode*);
+    void    (*Gen)          (struct SCompiler *, TInstruction);
+    TStack* (*Compile)      (struct SCompiler *, TNode*);
+
+    void    (*MemoryRelease)(struct SCompiler *);
 } TCompiler;
-TCompiler*  Compiler    ();
+TCompiler*  Compiler        ();
 
 #endif

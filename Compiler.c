@@ -1,24 +1,23 @@
 #include <Compiler\Compiler.h>
-
 #include <Parser\Node.h>
-
 #include <VM\Instruction.h>
-
-#include "VM/Stack.h"
+#include <VM\Stack.h>
 
 #include <stdlib.h>
 
-#include "General/Common.h"
+#include <General\Common.h>
 
 static void Gen(TCompiler *, TInstruction);
-
 static TStack *Compile(TCompiler *, TNode *);
+
+static void MemoryRelease(TCompiler *);
 
 TCompiler *Compiler() {
     TCompiler *this = malloc(sizeof(TCompiler));
 
     this->Gen = Gen;
     this->Compile = Compile;
+    this->MemoryRelease = MemoryRelease;
 
     //CTR
     this->Program = new Stack();
@@ -108,4 +107,10 @@ static TStack *Compile(TCompiler *this, TNode *node) {
     }
 
     return this->Program;
+}
+
+static void MemoryRelease(TCompiler *this){
+    free(this);
+
+    this = __ZERO_PTR__;
 }

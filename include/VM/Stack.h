@@ -7,9 +7,11 @@ typedef struct SStack {
     int*    Array;
     int     Size;
 
-    void    (*Push) (struct SStack *, int);
-    int     (*Pop)  (struct SStack *);
+    void    (*Push)         (struct SStack *, int);
+    int     (*Pop)          (struct SStack *);
+
+    void    (*MemoryRelease)(struct SStack *);
 } TStack;
-TStack*     Stack   ();
+TStack*     Stack           ();
 
 #endif

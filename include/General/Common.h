@@ -9,4 +9,6 @@
 
 #define new
 
+typedef char* string;
+
 #endif

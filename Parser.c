@@ -4,21 +4,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "General/Common.h"
+#include <General\Common.h>
 
 static TNode *Term(TParser *);
-
 static TNode *Summ(TParser *this);
-
 static TNode *Test(TParser *);
-
 static TNode *Expr(TParser *);
-
 static TNode *ParenExpr(TParser *);
-
 static TNode *Statement(TParser *);
-
 static TNode *Parse(TParser *);
+
+static void MemoryRelease(TParser *);
 
 TParser *Parser(TLexer *lexer) {
     TParser *this = malloc(sizeof(TParser));
@@ -30,6 +26,8 @@ TParser *Parser(TLexer *lexer) {
     this->ParenExpr = ParenExpr;
     this->Statement = Statement;
     this->Parse = Parse;
+
+    this->MemoryRelease = MemoryRelease;
 
     // CTR
     this->lexer = lexer;
@@ -179,4 +177,10 @@ static TNode *Parse(TParser *this) {
     }
 
     return node;
+}
+
+static void MemoryRelease(TParser *this) {
+    free(this);
+
+    this = __ZERO_PTR__;
 }

@@ -1,26 +1,27 @@
 #include <VM\Instruction.h>
 #include <VM\VirtualMachine.h>
+#include <VM\Stack.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "VM/Stack.h"
+#include <General\Common.h>
 
-#include "General/Common.h"
+#define SIZE 26
 
-void Run(TStack *);
+static void Run(TStack *);
+static void MemoryRelease(TVirtualMachine *);
 
 TVirtualMachine *VirtualMachine() {
     TVirtualMachine *this = malloc(sizeof(TVirtualMachine));
 
     this->Run = Run;
+    this->MemoryRelease = MemoryRelease;
 
     return this;
 }
 
-#define SIZE 26
-
-void Run(TStack *program) {
+static void Run(TStack *program) {
     int var[SIZE];
     for (int i = 0; i < SIZE; i++) {
         var[i] = 0;
@@ -90,4 +91,10 @@ void Run(TStack *program) {
             printf("%c = %d\n", (char) (i + 'a'), var[i]);
         }
     }
+}
+
+static void MemoryRelease(TVirtualMachine *this){
+    free(this);
+
+    this = __ZERO_PTR__;
 }

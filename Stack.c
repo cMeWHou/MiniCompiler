@@ -1,12 +1,13 @@
-#include "VM/Stack.h"
+#include <VM\Stack.h>
 
 #include <stdlib.h>
 
-#include "General/Common.h"
+#include <General\Common.h>
 
 static void Push(TStack *, int);
-
 static int Pop(TStack *);
+
+static void MemoryRelease(TStack *);
 
 TStack *Stack() {
     TStack *this = malloc(sizeof(TStack));
@@ -42,4 +43,11 @@ static int Pop(TStack *this) {
     }
 
     return ret;
+}
+
+static void MemoryRelease(TStack *this){
+    free(this->Array);
+    free(this);
+
+    this = __ZERO_PTR__;
 }

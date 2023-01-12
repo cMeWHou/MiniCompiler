@@ -7,6 +7,8 @@
 
 typedef struct SVirtualMachine {
     void            (*Run)          (TStack *);
+
+    void            (*MemoryRelease)(struct SVirtualMachine *);
 } TVirtualMachine;
 TVirtualMachine*    VirtualMachine  ();
 

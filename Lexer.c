@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <General/Common.h>
+#include <General\Common.h>
 
 #define SYMBOLS_COUNT 9
 #define WORD_COUNT 4
@@ -16,16 +16,19 @@ static int IsExist(char);
 static int IsDigit(char);
 static int IsAlpha(char);
 
-TLexer *Lexer(char *path) {
+static void MemoryRelease(TLexer *);
+
+TLexer *Lexer(string path) {
     TLexer *this = malloc(sizeof(TLexer));
 
     this->NextChar = NextChar;
     this->NextToken = NextToken;
+    this->MemoryRelease = MemoryRelease;
 
     // CTR
     this->sourceCode = fopen(path, "r");
 
-    this->Symbols = Dictionary(SYMBOLS_COUNT);
+    this->Symbols = new Dictionary(SYMBOLS_COUNT);
     this->Symbols->Append(this->Symbols, '{', LBRA);
     this->Symbols->Append(this->Symbols, '}', RBRA);
     this->Symbols->Append(this->Symbols, '(', LPAR);
@@ -36,7 +39,7 @@ TLexer *Lexer(char *path) {
     this->Symbols->Append(this->Symbols, '-', MINUS);
     this->Symbols->Append(this->Symbols, '<', LESS);
 
-    this->Words = Dictionary(WORD_COUNT);
+    this->Words = new Dictionary(WORD_COUNT);
     this->Words->Append(this->Words, '?', IF);
     this->Words->Append(this->Words, ':', ELSE);
     this->Words->Append(this->Words, '$', WHILE);
@@ -108,4 +111,14 @@ static int IsAlpha(char ch) {
     if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))
         return 1;
     return 0;
+}
+
+static void MemoryRelease(TLexer *this) {
+    fclose(this->sourceCode);
+
+    free(this->Symbols);
+    free(this->Words);
+    free(this);
+
+    this = __ZERO_PTR__;
 }
