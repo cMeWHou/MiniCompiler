@@ -39,7 +39,7 @@ static TStack *Compile(TCompiler *this, TNode *node) {
     if (node->Kind == VAR) {
         this->Gen(this, IFETCH);
         this->Gen(this, node->Value);
-    } else if (node->Kind == CONST) {
+    } else if (node->Kind == IMMUT) {
         this->Gen(this, IPUSH);
         this->Gen(this, node->Value);
     } else if (node->Kind == ADD) {

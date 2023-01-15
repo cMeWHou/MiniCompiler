@@ -1,5 +1,6 @@
-#include <Connector/Connector.h>
+#include <Socket/Connector.h>
 
+#include <winsock.h>
 #include <stdlib.h>
 #include <stdio.h>
 

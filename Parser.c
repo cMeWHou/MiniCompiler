@@ -43,7 +43,7 @@ static TNode *Term(TParser *this) {
         this->lexer->NextToken(this->lexer);
         return node;
     } else if (this->lexer->Type == NUM) {
-        node = new Node(CONST, this->lexer->Value, __ZERO_PTR__, __ZERO_PTR__, __ZERO_PTR__);
+        node = new Node(IMMUT, this->lexer->Value, __ZERO_PTR__, __ZERO_PTR__, __ZERO_PTR__);
         this->lexer->NextToken(this->lexer);
         return node;
     } else {

@@ -4,7 +4,7 @@
 #define TYPE
 
 typedef enum EType {
-    VAR,    CONST,
+    VAR,    IMMUT,
     ADD,    SUB,
     LT,
     SET,

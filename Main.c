@@ -1,8 +1,8 @@
 // EntryPoint
 
-#include <Connector/Connector.h>
-#include <Connector/Server.h>
-#include <Connector/Exchange.h>
+#include <Socket/Connector.h>
+#include <Socket/Server.h>
+#include <Socket/Exchange.h>
 
 #include <Lexer/Lexer.h>
 #include <Parser/Parser.h>
@@ -12,11 +12,13 @@
 #include <General/Common.h>
 
 int main(int argc, char *argv[]) {
+    // listening connection
     TConnector* connector   = new Connector("127.0.0.1", 5555);
-    TServer* server         = new Server(serverSend, serverRecieve, &connector->client); // need add MemoryRelease()
+    TServer* server         = new Server(serverSend, serverRecieve, &connector->client);
 
-    string pathToSrcFile    = argv[argc - 1];
+    string pathToSrcFile; // need to be modified
 
+    // generating code
     TLexer*     lexer       = new Lexer(pathToSrcFile);
 
     TParser*    parser      = new Parser(lexer);
@@ -25,6 +27,7 @@ int main(int argc, char *argv[]) {
     TCompiler*  compiler    = new Compiler();
     TStack*     program     = compiler->Compile(compiler, ast);
 
+    // running program
     TVirtualMachine* vm     = new VirtualMachine();
     vm->Run(program);
 
@@ -33,6 +36,7 @@ int main(int argc, char *argv[]) {
     compiler->MemoryRelease(compiler);
     parser->MemoryRelease(parser);
     lexer->MemoryRelease(lexer);
+    server->MemoryRelease(server);
     connector->MemoryRelease(connector);
 
     return 0;
