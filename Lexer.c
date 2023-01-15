@@ -1,10 +1,10 @@
-#include <Lexer\Lexer.h>
-#include <Lexer\Dictionary.h>
+#include <Lexer/Lexer.h>
+#include <Lexer/Dictionary.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <General\Common.h>
+#include <General/Common.h>
 
 #define SYMBOLS_COUNT 9
 #define WORD_COUNT 4

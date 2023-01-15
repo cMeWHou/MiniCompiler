@@ -1,10 +1,10 @@
-#include <Lexer\Lexer.h>
-#include <Parser\Parser.h>
+#include <Lexer/Lexer.h>
+#include <Parser/Parser.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <General\Common.h>
+#include <General/Common.h>
 
 static TNode *Term(TParser *);
 static TNode *Summ(TParser *this);

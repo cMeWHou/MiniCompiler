@@ -1,9 +1,9 @@
-#include <Lexer\Dictionary.h>
-#include <Lexer\Lexeme.h>
+#include <Lexer/Dictionary.h>
+#include <Lexer/Lexeme.h>
 
 #include <stdlib.h>
 
-#include <General\Common.h>
+#include <General/Common.h>
 
 static void Append(TDictionary *, char, TLexeme);
 static void Remove(TDictionary *, char);

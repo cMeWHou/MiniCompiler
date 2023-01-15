@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 
-#include <General\Common.h>
+#include <General/Common.h>
 
 typedef struct SLexer {
     FILE*           sourceCode;

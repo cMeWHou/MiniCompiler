@@ -3,8 +3,8 @@
 #ifndef PARSER
 #define PARSER
 
-#include <Parser\Node.h>
-#include <Lexer\Lexer.h>
+#include <Parser/Node.h>
+#include <Lexer/Lexer.h>
 
 typedef struct SParser {
     TLexer*   lexer;

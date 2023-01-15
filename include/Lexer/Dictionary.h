@@ -3,9 +3,9 @@
 #ifndef LEXER_DICTIONARY
 #define LEXER_DICTIONARY
 
-#include <Lexer\Lexeme.h>
+#include <Lexer/Lexeme.h>
 
-#include <General\Common.h>
+#include <General/Common.h>
 
 typedef struct SDictionary {
     string      Key;

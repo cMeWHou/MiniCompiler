@@ -1,11 +1,11 @@
-#include <Compiler\Compiler.h>
-#include <Parser\Node.h>
-#include <VM\Instruction.h>
-#include <VM\Stack.h>
+#include <Compiler/Compiler.h>
+#include <Parser/Node.h>
+#include <VM/Instruction.h>
+#include <VM/Stack.h>
 
 #include <stdlib.h>
 
-#include <General\Common.h>
+#include <General/Common.h>
 
 static void Gen(TCompiler *, TInstruction);
 static TStack *Compile(TCompiler *, TNode *);

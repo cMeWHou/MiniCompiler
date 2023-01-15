@@ -1,11 +1,11 @@
-#include <VM\Instruction.h>
-#include <VM\VirtualMachine.h>
-#include <VM\Stack.h>
+#include <VM/Instruction.h>
+#include <VM/VirtualMachine.h>
+#include <VM/Stack.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <General\Common.h>
+#include <General/Common.h>
 
 #define SIZE 26
 
@@ -82,13 +82,6 @@ static void Run(TStack *program) {
             pc = arg;
         } else if (op == HALT) {
             break;
-        }
-    }
-
-    printf("Execution finished.\n");
-    for (int i = 0; i < SIZE; i++) {
-        if (var[i] != 0) {
-            printf("%c = %d\n", (char) (i + 'a'), var[i]);
         }
     }
 }

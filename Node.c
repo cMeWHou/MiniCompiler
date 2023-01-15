@@ -1,8 +1,8 @@
-#include <Parser\Node.h>
+#include <Parser/Node.h>
 
 #include <stdlib.h>
 
-#include <General\Common.h>
+#include <General/Common.h>
 
 static void MemoryRelease(TNode *);
 

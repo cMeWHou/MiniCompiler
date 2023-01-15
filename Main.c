@@ -1,14 +1,21 @@
 // EntryPoint
 
-#include <Lexer\Lexer.h>
-#include <Parser\Parser.h>
-#include <Compiler\Compiler.h>
-#include <VM\VirtualMachine.h>
+#include <Connector/Connector.h>
+#include <Connector/Server.h>
+#include <Connector/Exchange.h>
 
-#include <General\Common.h>
+#include <Lexer/Lexer.h>
+#include <Parser/Parser.h>
+#include <Compiler/Compiler.h>
+#include <VM/VirtualMachine.h>
+
+#include <General/Common.h>
 
 int main(int argc, char *argv[]) {
-    const string pathToSrcFile = argv[1];
+    TConnector* connector   = new Connector("127.0.0.1", 5555);
+    TServer* server         = new Server(serverSend, serverRecieve, &connector->client); // need add MemoryRelease()
+
+    string pathToSrcFile    = argv[argc - 1];
 
     TLexer*     lexer       = new Lexer(pathToSrcFile);
 
@@ -26,6 +33,7 @@ int main(int argc, char *argv[]) {
     compiler->MemoryRelease(compiler);
     parser->MemoryRelease(parser);
     lexer->MemoryRelease(lexer);
+    connector->MemoryRelease(connector);
 
     return 0;
 }

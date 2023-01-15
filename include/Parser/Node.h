@@ -3,7 +3,7 @@
 #ifndef NODE
 #define NODE
 
-#include <Parser\Type.h>
+#include <Parser/Type.h>
 
 typedef struct SNode {
     TType           Kind;
