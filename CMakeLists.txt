@@ -8,7 +8,7 @@ set(LEXER_SRC       "Lexer.c"           "Dictionary.c")
 set(PARSER_SRC      "Parser.c"          "Node.c")
 set(COMPILER_SRC    "Compiler.c")
 set(VM_SRC          "VirtualMachine.c"  "Stack.c")
-set(SOCKET_SRC      "Connector.c"       "Server.c"      "Exchange.c")
+set(SOCKET_SRC      "WebInterface.c"    "WebSocket.c"   "Exchange.c")
 set(MAIN_SRC        "Main.c")
 
 set(SRC             ${LEXER_SRC}    ${PARSER_SRC}   ${COMPILER_SRC}

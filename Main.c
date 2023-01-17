@@ -1,8 +1,5 @@
 // EntryPoint
-
-#include <Socket/Connector.h>
-#include <Socket/Server.h>
-#include <Socket/Exchange.h>
+#include <WebAPI/Exchange.h>
 
 #include <Lexer/Lexer.h>
 #include <Parser/Parser.h>
@@ -13,22 +10,26 @@
 
 int main(int argc, char *argv[]) {
     // listening connection
-    TConnector* connector   = new Connector("127.0.0.1", 5555);
-    TServer* server         = new Server(serverSend, serverRecieve, &connector->client);
+    string serverIP = "127.0.0.1";
+    int port = 8585;
 
-    string pathToSrcFile; // need to be modified
+    TWebInterface* webInterface = new WebInterface(serverIP, port);
+    TExchange* exchange         = new Exchange(webInterface);
+    exchange->Start(exchange);
+
+    string pathToSrcFile; // TODO: need to be modified
 
     // generating code
-    TLexer*     lexer       = new Lexer(pathToSrcFile);
+    TLexer*     lexer           = new Lexer(pathToSrcFile);
 
-    TParser*    parser      = new Parser(lexer);
-    TNode*      ast         = parser->Parse(parser);
+    TParser*    parser          = new Parser(lexer);
+    TNode*      ast             = parser->Parse(parser);
 
-    TCompiler*  compiler    = new Compiler();
-    TStack*     program     = compiler->Compile(compiler, ast);
+    TCompiler*  compiler        = new Compiler();
+    TStack*     program         = compiler->Compile(compiler, ast);
 
     // running program
-    TVirtualMachine* vm     = new VirtualMachine();
+    TVirtualMachine* vm         = new VirtualMachine();
     vm->Run(program);
 
     // memory release
@@ -36,8 +37,8 @@ int main(int argc, char *argv[]) {
     compiler->MemoryRelease(compiler);
     parser->MemoryRelease(parser);
     lexer->MemoryRelease(lexer);
-    server->MemoryRelease(server);
-    connector->MemoryRelease(connector);
+    exchange->MemoryRelease(exchange);
+    webInterface->MemoryRelease(webInterface);
 
     return 0;
 }
