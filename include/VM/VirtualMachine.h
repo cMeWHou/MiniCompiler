@@ -6,9 +6,11 @@
 #include <VM/Stack.h>
 
 typedef struct SVirtualMachine {
-    void            (*Run)          (TStack *);
+    void*           res;
 
-    void            (*MemoryRelease)(struct SVirtualMachine *);
+    void*           (*Run)          (struct SVirtualMachine*, TStack *);
+
+    void            (*MemoryRelease)(struct SVirtualMachine*);
 } TVirtualMachine;
 TVirtualMachine*    VirtualMachine  ();
 

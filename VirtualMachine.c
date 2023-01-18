@@ -7,10 +7,10 @@
 
 #include <General/Common.h>
 
-#define SIZE 26
+#define SIZE 512
 
-static void Run(TStack *);
-static void MemoryRelease(TVirtualMachine *);
+static void* Run(TVirtualMachine*, TStack*);
+static void MemoryRelease(TVirtualMachine*);
 
 TVirtualMachine *VirtualMachine() {
     TVirtualMachine *this = malloc(sizeof(TVirtualMachine));
@@ -21,10 +21,10 @@ TVirtualMachine *VirtualMachine() {
     return this;
 }
 
-static void Run(TStack *program) {
-    int var[SIZE];
+static void* Run(TVirtualMachine* this, TStack* program) {
+    this->res = (void*)malloc(SIZE);
     for (int i = 0; i < SIZE; i++) {
-        var[i] = 0;
+        ((string)this->res)[i] = 0;
     }
 
     TStack *stack = new Stack();
@@ -38,10 +38,10 @@ static void Run(TStack *program) {
         }
 
         if (op == IFETCH) {
-            stack->Push(stack, var[arg - 'a']);
+            stack->Push(stack, ((string)this->res)[arg - 'a']);
             pc += 2;
         } else if (op == ISTORE) {
-            var[arg - 'a'] = stack->Pop(stack);
+            ((string)this->res)[arg - 'a'] = stack->Pop(stack);
             pc += 2;
         } else if (op == IPUSH) {
             stack->Push(stack, arg);
@@ -84,9 +84,12 @@ static void Run(TStack *program) {
             break;
         }
     }
+    return ((string)this->res);
 }
 
 static void MemoryRelease(TVirtualMachine *this){
+    free(this->res);
+
     free(this);
 
     this = __ZERO_PTR__;

@@ -15,9 +15,8 @@ int main(int argc, char *argv[]) {
 
     TWebInterface* webInterface = new WebInterface(serverIP, port);
     TExchange* exchange         = new Exchange(webInterface);
-    exchange->Start(exchange);
 
-    string pathToSrcFile; // TODO: need to be modified
+    string pathToSrcFile        = exchange->Read(exchange);
 
     // generating code
     TLexer*     lexer           = new Lexer(pathToSrcFile);
@@ -30,7 +29,9 @@ int main(int argc, char *argv[]) {
 
     // running program
     TVirtualMachine* vm         = new VirtualMachine();
-    vm->Run(program);
+
+    void* res                   = vm->Run(vm, program);
+    exchange->Send(exchange, res);
 
     // memory release
     vm->MemoryRelease(vm);
